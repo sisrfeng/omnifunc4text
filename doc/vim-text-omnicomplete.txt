@@ -1,0 +1,107 @@
+*vim-text-omnicomplete.txt*
+
+Autocompletion of English words in plain text files.
+
+==============================================================================
+CONTENTS                                               *vim-text-omnicomplete*
+
+    1. Introduction.....................|vim-text-omnicomplete-intro|
+    2. Usage............................|vim-text-omnicomplete-usage|
+    3. Configuration....................|vim-text-omnicomplete-config|
+    4. Credits..........................|vim-text-omnicomplete-credits|
+    5. License..........................|vim-text-omnicomplete-license|
+    6. Contributing.....................|vim-text-omnicomplete-contributing|
+
+==============================================================================
+INTRODUCTION                                     *vim-text-omnicomplete-intro*
+
+vim-text-omnicomplete is a Vim autocomplete plugin for English words in plain
+text files. It provides autocomplete suggestions of English words based on a
+word frequency list. To improve the accuracy of suggestions, it also makes
+suggestions based on the preceding word.
+
+This plugin automatically sets the omni completion function (|omnifunc|) for
+files with the text filetype. As such, when editing text files, you will
+be able to use |i_CTRL-X_CTRL-O| to show a list of autocomplete suggestions.
+
+The plugin works by first looking for a preceding word. If a previous word
+is found, the plugin will look for probable next words from a bigram list.
+To illustrate, suppose the user has so far typed "African co". If the bigram
+list contains "african continent", "african countries", and "african country",
+the plugin determines that "continent", "countries", and "country" are the
+probable next words, and so it places these words into the list of suggestions.
+
+When no next word can be found using the bigram method described above, or if
+the bigram method does not return enough results, additional completions are
+suggested from a list of words ordered by frequency. For example, if the user
+has so far entered "enli", and the word frequency list contains
+"enlightenment", "enlisted", and "enlightened", those words will be placed in
+the list of suggestions.
+
+==============================================================================
+USAGE                                           *vim-text-omnicomplete-usage*
+
+This plugin automatically sets the omni completion function (|omnifunc|) to
+`text_omnicomplete#OmniComplete` for files with the text filetype. As such,
+when editing text files, you will be able to use |i_CTRL-X_CTRL-O| to show a
+list of autocomplete suggestions.
+
+You may also configure Vim to use `text_omnicomplete#OmniComplete` for other
+filetypes. For example, to use vim-text-omnicomplete for markdown files, add
+this line to your |vimrc|: >
+
+    autocmd FileType markdown setlocal omnifunc=text_omnicomplete#OmniComplete
+<
+==============================================================================
+CONFIGURATION                                   *vim-text-omnicomplete-config*
+
+vim-text-omnicomplete's behaviour can be configured by setting the global
+variables below in your |vimrc| file and restarting Vim.
+
+CONFIGURATION OPTIONS                          *vim-text-omnicomplete-options*
+
+g:text_omnicomplete#enable_plugin          *g:text_omnicomplete#enable_plugin*
+        Determines whether or not the plugin should be automatically loaded.
+        If `1`, the plugin is automatically loaded for files with the text
+        filetype. If `0`, the plugin is not automatically loaded. The default
+        value is `1`.
+
+g:text_omnicomplete#max_bigram_results *g:text_omnicomplete#max_bigram_results*
+        The maximum number of suggestions, based on the previous word, to
+        return. The default value is `300`.
+        We recommend that you leave this option at its default value unless
+        autocomplete is too slow, in which case you should set a lower value.
+
+g:text_omnicomplete#max_total_results  *g:text_omnicomplete#max_total_results*
+        The maximum number of suggestions to return.
+        For example, if `g:text_omnicomplete#max_total_results` is `1000`, and
+        `g:text_omnicomplete#max_bigram_results` is `200`, at most `200`
+        results based on the previous word will be returned, and at most `800`
+        of other results will be returned. The default value is `600`.
+        We recommend that you leave this option at its default value unless
+        autocomplete is too slow, in which case you should set a lower value.
+
+==============================================================================
+CREDITS                                        *vim-text-omnicomplete-credits*
+
+Author: Chuan Wei Foo
+
+The word lists used in this plugin are based on the ones provided by
+Peter Norvig at http://norvig.com/ngrams/.
+
+==============================================================================
+LICENSE                                        *vim-text-omnicomplete-license*
+
+This project is distributed under the BSD 3-Clause License (see LICENSE).
+This project uses third-party components that are licensed under their own
+terms (see LICENSE-3RD-PARTY).
+
+==============================================================================
+CONTRIBUTING                              *vim-text-omnicomplete-contributing*
+
+Bug reports, suggestions, and improvements should be submitted on GitHub:
+
+    https://github.com/cwfoo/vim-text-omnicomplete
+
+==============================================================================
+" vim: set filetype=help:
