@@ -14,6 +14,10 @@ if !exists('g:text_omnicomplete_max_total_results')
     let g:text_omnicomplete_max_total_results = 600
 endif
 
+if !exists('g:text_omnicomplete_bigram_indicator')
+    let g:text_omnicomplete_bigram_indicator = '*'
+endif
+
 " Main function for completion - the omnifunc.
 " See ':help complete-functions' for the specification of this function.
 function! text_omnicomplete#OmniComplete(findstart, base)
@@ -62,7 +66,10 @@ function! s:get_completions(base, start_of_word)
                 if first_letter_is_upper == 1
                     let word = first_letter . strpart(word, 1)
                 endif
-                call add(results, {'word': word, 'menu': '[bigram]'})
+                call add(results, {
+                    \'word': word,
+                    \'menu': g:text_omnicomplete_bigram_indicator,
+                \})
                 let num_bigram_results += 1
             endif
 

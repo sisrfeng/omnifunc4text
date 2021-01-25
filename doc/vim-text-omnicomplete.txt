@@ -81,6 +81,12 @@ g:text_omnicomplete_max_total_results  *g:text_omnicomplete_max_total_results*
         We recommend that you leave this option at its default value unless
         autocomplete is too slow, in which case you should set a lower value.
 
+g:text_omnicomplete_bigram_indicator    *g:text_omnicomplete_bigram_indicator*
+        The indicator string used to identify bigram completion candidates
+        in the popup completion menu. The default is an asterisk ('*').
+        This can also be set to an empty string or a string with more than
+        one character.
+
 ==============================================================================
 CREDITS                                        *vim-text-omnicomplete-credits*
 
