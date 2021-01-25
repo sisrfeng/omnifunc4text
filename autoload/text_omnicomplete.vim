@@ -1,17 +1,17 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-if exists('g:text_omnicomplete#enable_plugin')
-        \ && g:text_omnicomplete#enable_plugin == 0
+if exists('g:text_omnicomplete_enable_plugin')
+        \ && g:text_omnicomplete_enable_plugin == 0
     finish
 endif
 
-if !exists('g:text_omnicomplete#max_bigram_results')
-    let g:text_omnicomplete#max_bigram_results = 300
+if !exists('g:text_omnicomplete_max_bigram_results')
+    let g:text_omnicomplete_max_bigram_results = 300
 endif
 
-if !exists('g:text_omnicomplete#max_total_results')
-    let g:text_omnicomplete#max_total_results = 600
+if !exists('g:text_omnicomplete_max_total_results')
+    let g:text_omnicomplete_max_total_results = 600
 endif
 
 " Main function for completion - the omnifunc.
@@ -68,7 +68,7 @@ function! s:get_completions(base, start_of_word)
 
             " Stop adding bigram results when the user-specified number of
             " results has been reached.
-            if num_bigram_results >= g:text_omnicomplete#max_bigram_results
+            if num_bigram_results >= g:text_omnicomplete_max_bigram_results
                 break
             endif
         endfor
@@ -79,7 +79,7 @@ function! s:get_completions(base, start_of_word)
     for suffix_candidate in text_omnicomplete_data#get_prefix_matches(tolower(a:base))
         " Stop adding results when the user-specified number of results
         " has been reached.
-        if num_results >= g:text_omnicomplete#max_total_results
+        if num_results >= g:text_omnicomplete_max_total_results
             break
         endif
 

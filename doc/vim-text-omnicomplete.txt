@@ -60,22 +60,22 @@ variables below in your |vimrc| file and restarting Vim.
 
 CONFIGURATION OPTIONS                          *vim-text-omnicomplete-options*
 
-g:text_omnicomplete#enable_plugin          *g:text_omnicomplete#enable_plugin*
+g:text_omnicomplete_enable_plugin          *g:text_omnicomplete_enable_plugin*
         Determines whether or not the plugin should be automatically loaded.
         If `1`, the plugin is automatically loaded for files with the text
         filetype. If `0`, the plugin is not automatically loaded. The default
         value is `1`.
 
-g:text_omnicomplete#max_bigram_results *g:text_omnicomplete#max_bigram_results*
+g:text_omnicomplete_max_bigram_results *g:text_omnicomplete_max_bigram_results*
         The maximum number of suggestions, based on the previous word, to
         return. The default value is `300`.
         We recommend that you leave this option at its default value unless
         autocomplete is too slow, in which case you should set a lower value.
 
-g:text_omnicomplete#max_total_results  *g:text_omnicomplete#max_total_results*
+g:text_omnicomplete_max_total_results  *g:text_omnicomplete_max_total_results*
         The maximum number of suggestions to return.
-        For example, if `g:text_omnicomplete#max_total_results` is `1000`, and
-        `g:text_omnicomplete#max_bigram_results` is `200`, at most `200`
+        For example, if `g:text_omnicomplete_max_total_results` is `1000`, and
+        `g:text_omnicomplete_max_bigram_results` is `200`, at most `200`
         results based on the previous word will be returned, and at most `800`
         of other results will be returned. The default value is `600`.
         We recommend that you leave this option at its default value unless
