@@ -17,86 +17,44 @@ endif
 " Main function for completion - the omnifunc.
 " See ':help complete-functions' for the specification of this function.
 function! text_omnicomplete#OmniComplete(findstart, base)
-    " Locate the start of the word.
-    let line = getline('.')
-    let start_of_word = col('.') - 1
-    while start_of_word > 0 && line[start_of_word - 1] =~ '\w'
-        let start_of_word -= 1
-    endwhile
-
+    " Locate the start column of the word.
+    let start_of_word = searchpos('\s', 'Wnb', line('.'))[1]
     if a:findstart
         return start_of_word
     else
-        return s:get_completions(a:base, line, start_of_word)
+        return s:get_completions(a:base, start_of_word)
     endif
 endfun
 
+" Get the first word before the given column on the given line.
+" Returns '' if there is no such word.
+function! s:get_previous_word(line, start_col)
+    " Search the current line and if there is no word, try the line above
+    " (only two lines are searched).
+    let orig_line = line('.')
+    let orig_col = col('.')
+    call cursor(a:line, a:start_col)
+    let stopline = a:line > 1 ? a:line - 1 : 1
+    let [match_line, match_col] = searchpos('\S\+', 'Wnb', stopline)
+    call cursor(orig_line, orig_col)  " Restore cursor position.
+    if [match_line, match_col] == [0, 0]
+        return ''
+    endif
+    return matchstr(getline(match_line), '\S\+', match_col - 1)
+endfunction
+
 " Returns a list of suggested completions.
-function! s:get_completions(base, cur_line, start_of_word)
+function! s:get_completions(base, start_of_word)
     " Check if the first letter of the curent prefix is a capital letter.
     let first_letter = strpart(a:base, 0, 1)
     let first_letter_is_upper = first_letter =~# '[A-Z]'
 
-    " Try to locate the start of the previous whole word on the current line.
-    let start_of_previous_word = a:start_of_word - 1
-    while start_of_previous_word > 0
-            \ && a:cur_line[start_of_previous_word - 1] =~ '\a'
-        let start_of_previous_word -= 1
-    endwhile
-    " Is there a previous word on the current line?
-    let cur_line_has_previous_word = 1
-    if start_of_previous_word == a:start_of_word - 1  " If not found on current line.
-        let cur_line_has_previous_word = 0
-    endif
-
-    if cur_line_has_previous_word == 1
-        " A previous word has been found on the current line.
-        let has_previous_word = 1
-        let previous_word = strpart(
-                        \ a:cur_line,
-                        \ start_of_previous_word,
-                        \ a:start_of_word - start_of_previous_word - 1)
-    else
-        " No previous word on current line was found, so now try to find one
-        " on the line above the current line.
-        let cur_line_num = line('.')
-        if cur_line_num == 1  " User is on the first line; there is no line above.
-            let has_previous_word = 0
-        else  " There is a line above.
-            " Try to find the last word in the line above by scanning from
-            " the end of the line.
-            let prev_line = getline(cur_line_num - 1)
-            " Skip trailing whitespace to find the end of the last word on the
-            " line.
-            let end_of_previous_word = len(prev_line)
-            while end_of_previous_word > 0
-                    \ && prev_line[end_of_previous_word - 1] =~ '\s'
-                let end_of_previous_word -= 1
-            endwhile
-            " Find the start of the last word on the line.
-            let start_of_previous_word = end_of_previous_word
-            while start_of_previous_word > 0
-                    \ && prev_line[start_of_previous_word - 1] =~ '\a'
-                let start_of_previous_word -= 1
-            endwhile
-
-            if start_of_previous_word == end_of_previous_word
-                " No non-whitespace characters found.
-                let has_previous_word = 0
-            else
-                let has_previous_word = 1
-                let previous_word = strpart(
-                        \ prev_line,
-                        \ start_of_previous_word,
-                        \ end_of_previous_word - start_of_previous_word)
-            endif
-        endif
-    endif
-
     let results = []
+
     " If a previous word is available, insert suggestions based on 2-grams.
     let num_bigram_results = 0
-    if has_previous_word == 1
+    let previous_word = s:get_previous_word(line('.'), a:start_of_word)
+    if previous_word != ''
         for word in text_omnicomplete_data#get_bigram_matches(tolower(previous_word))
             if word =~? '^' . a:base
                 " Capitalize word if user has entered a prefix that starts
