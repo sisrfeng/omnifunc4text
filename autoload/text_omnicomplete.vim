@@ -33,17 +33,9 @@ endfun
 
 " Returns a list of suggested completions.
 function! s:get_completions(base, cur_line, start_of_word)
-    let capital_letters = [
-        \ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-        \ 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
-    \]
-
     " Check if the first letter of the curent prefix is a capital letter.
     let first_letter = strpart(a:base, 0, 1)
-    let first_letter_is_upper = 0
-    if index(capital_letters, first_letter) != -1
-        let first_letter_is_upper = 1
-    endif
+    let first_letter_is_upper = first_letter =~# '[A-Z]'
 
     " Try to locate the start of the previous whole word on the current line.
     let start_of_previous_word = a:start_of_word - 1
