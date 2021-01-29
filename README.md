@@ -19,7 +19,7 @@ Specific installation steps depend on the plugin manager you use:
 On Unix:
 ```bash
 mkdir -p ~/.vim/pack/git-plugins/start/
-cd ~/vim/pack/git-plugins/start/
+cd ~/.vim/pack/git-plugins/start/
 git clone https://github.com/cwfoo/vim-text-omnicomplete.git
 ```
 
