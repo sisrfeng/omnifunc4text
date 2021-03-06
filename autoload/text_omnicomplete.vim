@@ -1,10 +1,11 @@
+if exists('g:text_omnicomplete_enable_plugin')
+    if g:text_omnicomplete_enable_plugin == 0
+        finish
+    endif
+endif
+
 let s:save_cpo = &cpo
 set cpo&vim
-
-if exists('g:text_omnicomplete_enable_plugin')
-        \ && g:text_omnicomplete_enable_plugin == 0
-    finish
-endif
 
 if !exists('g:text_omnicomplete_max_bigram_results')
     let g:text_omnicomplete_max_bigram_results = 300
