@@ -110,4 +110,4 @@ Bug reports, suggestions, and improvements should be submitted on GitHub:
     https://github.com/cwfoo/vim-text-omnicomplete
 
 ==============================================================================
-" vim: set filetype=help:
+ vim:tw=78:ts=8:noet:ft=help:norl:
