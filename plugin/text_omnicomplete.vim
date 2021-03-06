@@ -1,5 +1,5 @@
-if exists('g:text_omnicomplete#enable_plugin')
-        \ && g:text_omnicomplete#enable_plugin == 0
+if exists('g:text_omnicomplete_enable_plugin')
+        \ && g:text_omnicomplete_enable_plugin == 0
     finish
 endif
 
