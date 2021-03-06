@@ -60,7 +60,7 @@ function! s:get_completions(base, start_of_word)
     let previous_word = s:get_previous_word(line('.'), a:start_of_word)
     if previous_word != ''
         for word in text_omnicomplete_data#get_bigram_matches(tolower(previous_word))
-            if word =~? '^' . a:base
+            if stridx(word, tolower(a:base)) == 0
                 " Capitalize word if user has entered a prefix that starts
                 " with a capital letter.
                 if first_letter_is_upper == 1
