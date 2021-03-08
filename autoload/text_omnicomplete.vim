@@ -50,6 +50,10 @@ endfunction
 
 " Returns a list of suggested completions.
 function! s:get_completions(base, start_of_word)
+    if a:base !~? '\m^\a*$'  " If the prefix is not completely alphabetic.
+        return []
+    endif
+
     " Check if the first letter of the curent prefix is a capital letter.
     let first_letter = strpart(a:base, 0, 1)
     let first_letter_is_upper = first_letter =~# '[A-Z]'
