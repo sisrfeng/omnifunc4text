@@ -21,7 +21,7 @@ endif
 
 " Main function for completion - the omnifunc.
 " See ':help complete-functions' for the specification of this function.
-function! text_omnicomplete#OmniComplete(findstart, base)
+function! text_omnicomplete#OmniComplete(findstart, base) abort
     " Locate the start column of the word.
     let start_of_word = searchpos('\s', 'Wnb', line('.'))[1]
     if a:findstart
