@@ -12,6 +12,7 @@ let s:this_file = expand('<sfile>:p')
 
 if !exists('*text_omnicomplete#build')  " Prevent E127 when re-sourcing.
     function text_omnicomplete#build() abort
+        let save_dir = chdir(s:plugin_root)
         if executable('make')
             let cmd = 'make'
         else
@@ -31,6 +32,7 @@ if !exists('*text_omnicomplete#build')  " Prevent E127 when re-sourcing.
         endif
         echomsg 'vim-text-omnicomplete: Building ...'
         let output = system(cmd)
+        call chdir(save_dir)
         if v:shell_error == 0
             echomsg 'vim-text-omnicomplete: Finished building.'
             execute 'source ' . s:this_file
