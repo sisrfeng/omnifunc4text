@@ -7,6 +7,50 @@ endif
 let s:save_cpo = &cpo
 set cpo&vim
 
+let s:plugin_root = expand('<sfile>:p:h:h')
+let s:this_file = expand('<sfile>:p')
+
+if !exists('*text_omnicomplete#build')  " Prevent E127 when re-sourcing.
+    function text_omnicomplete#build() abort
+        if executable('make')
+            let cmd = 'make'
+        else
+            if executable('python3')
+                let l:python = 'python3'
+            elseif executable('python2')
+                let l:python = 'python2'
+            elseif executable('python')
+                let l:python = 'python'
+            else
+                echohl ErrorMsg
+                echomsg 'vim-text-omnicomplete: Python executable not found.'
+                echohl None
+                return
+            endif
+            let cmd = l:python . ' ' . s:plugin_root . '/build.py'
+        endif
+        echomsg 'vim-text-omnicomplete: Building ...'
+        let output = system(cmd)
+        if v:shell_error == 0
+            echomsg 'vim-text-omnicomplete: Finished building.'
+            execute 'source ' . s:this_file
+        else
+            echohl ErrorMsg
+            echomsg 'Exit code ' . v:shell_error . ': ' . cmd
+            echomsg 'Output: ' . output
+            echohl None
+        endif
+    endfunction
+endif
+
+if filereadable(expand('<sfile>:p:h') . '/text_omnicomplete_data.vim') == 0
+    echohl ErrorMsg
+    echomsg 'vim-text-omnicomplete: Build step needed. ' .
+            \'Run :TextOmnicompleteBuild'
+    echohl None
+    finish
+endif
+
 if !exists('g:text_omnicomplete_max_bigram_results')
     let g:text_omnicomplete_max_bigram_results = 300
 endif

@@ -1,2 +1,0 @@
-./generate_vimscript.py generates ../autoload/text_omnicomplete_data.vim using
-the words in ./scrabble-words.txt, ./1gram.txt, and ./2gram.txt.

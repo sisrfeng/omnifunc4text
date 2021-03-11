@@ -8,9 +8,10 @@ CONTENTS                                               *vim-text-omnicomplete*
     1. Introduction.....................|vim-text-omnicomplete-intro|
     2. Usage............................|vim-text-omnicomplete-usage|
     3. Configuration....................|vim-text-omnicomplete-config|
-    4. Credits..........................|vim-text-omnicomplete-credits|
-    5. License..........................|vim-text-omnicomplete-license|
-    6. Contributing.....................|vim-text-omnicomplete-contributing|
+    4. Commands.........................|vim-text-omnicomplete-commands|
+    5. Credits..........................|vim-text-omnicomplete-credits|
+    6. License..........................|vim-text-omnicomplete-license|
+    7. Contributing.....................|vim-text-omnicomplete-contributing|
 
 ==============================================================================
 INTRODUCTION                                     *vim-text-omnicomplete-intro*
@@ -88,6 +89,14 @@ g:text_omnicomplete_bigram_indicator    *g:text_omnicomplete_bigram_indicator*
         one character.
 
 ==============================================================================
+COMMANDS                                      *vim-text-omnicomplete-commands*
+
+:TextOmnicompleteBuild                                *:TextOmnicompleteBuild*
+Convenience command for running the build step. This can be run if you have
+forgotten to run the build step during installation. It is safe to run this
+command more than once.
+
+==============================================================================
 CREDITS                                        *vim-text-omnicomplete-credits*
 
 Author: Chuan Wei Foo
@@ -105,7 +114,7 @@ terms (see LICENSE-3RD-PARTY).
 ==============================================================================
 CONTRIBUTING                              *vim-text-omnicomplete-contributing*
 
-Bug reports, suggestions, and improvements should be submitted on GitHub:
+Bug reports, suggestions, and patches should be submitted on GitHub:
 
     https://github.com/cwfoo/vim-text-omnicomplete
 

@@ -12,36 +12,36 @@ a list of autocomplete suggestions.
 ![vim-text-omnicomplete screenshot](screenshot.png)
 
 
-## Installation
-Specific installation steps depend on the plugin manager you use:
+## Requirements
+* Python — This plugin requires Python for a build step.
+* GNU Make
 
-### Installation using Vim 8 package management
-On Unix:
-```bash
+
+## Installation
+### Installation using Vim's native package management
+On Unix-like systems:
+```sh
 mkdir -p ~/.vim/pack/git-plugins/start/
 cd ~/.vim/pack/git-plugins/start/
 git clone https://github.com/cwfoo/vim-text-omnicomplete.git
+cd vim-text-omnicomplete
+make
 ```
 
-On Windows using the 'Git for Windows' Bash terminal:
-```bash
+On Windows using the "Git for Windows" Bash terminal:
+```sh
 mkdir -p ~/vimfiles/pack/git-plugins/start/
 cd ~/vimfiles/pack/git-plugins/start/
 git clone https://github.com/cwfoo/vim-text-omnicomplete.git
-```
-
-### Installation using Vundle
-You can install this plugin using [Vundle](https://github.com/VundleVim/Vundle.vim)
-by adding the following line to your configuration and running `:PluginInstall`:
-```vim
-Plugin 'cwfoo/vim-text-omnicomplete'
+cd vim-text-omnicomplete
+make
 ```
 
 ### Installation using vim-plug
 You can install this plugin using [vim-plug](https://github.com/junegunn/vim-plug)
 by adding the following line to your configuration and running `:PlugInstall`:
 ```vim
-Plug 'cwfoo/vim-text-omnicomplete'
+Plug 'cwfoo/vim-text-omnicomplete', { 'do': 'make' }
 ```
 
 
@@ -50,17 +50,16 @@ See [doc/vim-text-omnicomplete.txt](doc/vim-text-omnicomplete.txt).
 
 
 ## Development Notes
-Build dependencies:
-* `make`
-* `python` (any version)
-
-`autoload/text_omnicomplete_data.vim` is built using the files in the `tools/`
-directory. Run `make` to rebuild it. Although it is a generated file, it is
-included in the git repository to make this plugin easier to install (no build
-step necessary for end-users).
+`autoload/text_omnicomplete_data.vim` is built using the files in the `data/`
+directory. Run `make` to rebuild it.
 
 
 ## License
 This project is distributed under the BSD 3-Clause License (see LICENSE).
 This project uses third-party components that are licensed under their own terms
 (see LICENSE-3RD-PARTY).
+
+
+## Contributing
+Bug reports, suggestions, and patches should be submitted on GitHub:
+https://github.com/cwfoo/vim-text-omnicomplete
