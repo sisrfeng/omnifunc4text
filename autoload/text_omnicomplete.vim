@@ -4,9 +4,6 @@ if exists('g:text_omnicomplete_enable_plugin')
     endif
 endif
 
-let s:save_cpo = &cpo
-set cpo&vim
-
 let s:plugin_root = expand('<sfile>:p:h:h')
 let s:this_file = expand('<sfile>:p')
 
@@ -47,11 +44,13 @@ endif
 
 if filereadable(expand('<sfile>:p:h') . '/text_omnicomplete_data.vim') == 0
     echohl ErrorMsg
-    echomsg 'vim-text-omnicomplete: Build step needed. ' .
-            \'Run :TextOmnicompleteBuild'
+    echomsg 'vim-text-omnicomplete: Build step needed. Run :TextOmnicompleteBuild'
     echohl None
     finish
 endif
+
+let s:save_cpo = &cpo
+set cpo&vim
 
 if !exists('g:text_omnicomplete_max_bigram_results')
     let g:text_omnicomplete_max_bigram_results = 300
