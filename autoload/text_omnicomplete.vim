@@ -10,8 +10,8 @@ set cpo&vim
 let s:plugin_root = expand('<sfile>:p:h:h')
 let s:this_file = expand('<sfile>:p')
 
-if !exists('*text_omnicomplete#build')  " Prevent E127 when re-sourcing.
-    function text_omnicomplete#build() abort
+if !exists('*text_omnicomplete#Build')  " Prevent E127 when re-sourcing.
+    function text_omnicomplete#Build() abort
         let save_dir = chdir(s:plugin_root)
         if executable('make')
             let cmd = 'make'
@@ -67,7 +67,7 @@ endif
 
 " Main function for completion - the omnifunc.
 " See ':help complete-functions' for the specification of this function.
-function! text_omnicomplete#OmniComplete(findstart, base) abort
+function! text_omnicomplete#Complete(findstart, base) abort
     " Locate the start column of the word.
     let start_of_word = searchpos('\s', 'Wnb', line('.'))[1]
     if a:findstart

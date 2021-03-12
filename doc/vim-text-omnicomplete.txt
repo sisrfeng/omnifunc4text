@@ -43,15 +43,15 @@ the list of suggestions.
 USAGE                                           *vim-text-omnicomplete-usage*
 
 This plugin automatically sets the omni completion function (|omnifunc|) to
-`text_omnicomplete#OmniComplete` for files with the text filetype. As such,
-when editing text files, you will be able to use |i_CTRL-X_CTRL-O| to show a
-list of autocomplete suggestions.
+`text_omnicomplete#Complete` for files with the text filetype. As such, when
+editing text files, you will be able to use |i_CTRL-X_CTRL-O| to show a list
+of autocomplete suggestions.
 
-You may also configure Vim to use `text_omnicomplete#OmniComplete` for other
+You may also configure Vim to use `text_omnicomplete#Complete` for other
 filetypes. For example, to use vim-text-omnicomplete for markdown files, add
 this line to your |vimrc|: >
 
-    autocmd FileType markdown setlocal omnifunc=text_omnicomplete#OmniComplete
+    autocmd FileType markdown setlocal omnifunc=text_omnicomplete#Complete
 <
 ==============================================================================
 CONFIGURATION                                   *vim-text-omnicomplete-config*

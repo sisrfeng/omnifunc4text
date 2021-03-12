@@ -4,6 +4,6 @@ if exists('g:text_omnicomplete_enable_plugin')
     endif
 endif
 
-autocmd FileType text setlocal omnifunc=text_omnicomplete#OmniComplete
+autocmd FileType text setlocal omnifunc=text_omnicomplete#Complete
 
-command! TextOmnicompleteBuild call text_omnicomplete#build()
+command! TextOmnicompleteBuild call text_omnicomplete#Build()
