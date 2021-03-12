@@ -8,6 +8,10 @@ PLUGIN_ROOT = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(PLUGIN_ROOT, 'data/')
 
 def py_dict_to_ordered_vim_dict(d):
+    '''Convert the given Python dictionary into a string representing a
+    Vimscript dictionary. The resulting Vimscript dictionary will have its keys
+    in alphabetical order.
+    '''
     entries = []
     for key in sorted(d.keys()):
         s = "'{}':{}".format(key, str(d[key]).replace(' ', ''))
