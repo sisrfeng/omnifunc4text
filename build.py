@@ -12,10 +12,10 @@ def py_dict_to_ordered_vim_dict(d):
     Vimscript dictionary. The resulting Vimscript dictionary will have its keys
     in alphabetical order.
     '''
-    entries = []
-    for key in sorted(d.keys()):
-        s = "'{}':{}".format(key, str(d[key]).replace(' ', ''))
-        entries.append(s)
+    entries = (
+        "'{}':{}".format(key, str(d[key]).replace(' ', ''))
+        for key in sorted(d.keys())
+    )
     return '{{{}}}'.format(','.join(entries))
 
 # Get list of valid English words (i.e. Scrabble words).
