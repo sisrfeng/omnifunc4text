@@ -151,7 +151,6 @@ function! s:get_completions(base, start_of_word)
     endfor
 
     return results
-
 endfunction
 
 let &cpo = s:save_cpo
