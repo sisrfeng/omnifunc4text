@@ -76,15 +76,15 @@ function! text_omnicomplete#Complete(findstart, base) abort
     endif
 endfun
 
-" Get the first word before the given column on the given line.
+" Get the first word before the given column on the current line.
 " Returns '' if there is no such word.
-function! s:get_previous_word(line, start_col)
+function! s:get_previous_word(start_col)
     " Search the current line and if there is no word, try the line above
     " (only two lines are searched).
     let orig_line = line('.')
     let orig_col = col('.')
-    call cursor(a:line, a:start_col)
-    let stopline = a:line > 1 ? a:line - 1 : 1
+    call cursor(orig_line, a:start_col)
+    let stopline = orig_line > 1 ? orig_line - 1 : 1
     let [match_line, match_col] = searchpos('\S\+', 'Wnb', stopline)
     call cursor(orig_line, orig_col)  " Restore cursor position.
     if [match_line, match_col] == [0, 0]
@@ -107,7 +107,7 @@ function! s:get_completions(base, start_of_word)
 
     " If a previous word is available, insert suggestions based on 2-grams.
     let num_bigram_results = 0
-    let previous_word = s:get_previous_word(line('.'), a:start_of_word)
+    let previous_word = s:get_previous_word(a:start_of_word)
     if previous_word != ''
         for word in text_omnicomplete_data#get_bigram_matches(tolower(previous_word))
             if stridx(word, tolower(a:base)) == 0
