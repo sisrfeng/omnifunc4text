@@ -5,7 +5,7 @@ if exists('g:text_omnicomplete_enable_plugin')
 endif
 
 let s:plugin_root = expand('<sfile>:p:h:h')
-let s:this_file = expand('<sfile>:p')
+let s:this_file   = expand('<sfile>:p')
 
 if !exists('*text_omnicomplete#Build')  " Prevent E127 when re-sourcing.
     function text_omnicomplete#Build() abort
@@ -52,17 +52,11 @@ endif
 let s:save_cpo = &cpo
 set cpo&vim
 
-if !exists('g:text_omnicomplete_max_bigram_results')
-    let g:text_omnicomplete_max_bigram_results = 300
-endif
+let g:text_omnicomplete_max_bigram_results = 300
 
-if !exists('g:text_omnicomplete_max_total_results')
-    let g:text_omnicomplete_max_total_results = 600
-endif
+let g:text_omnicomplete_max_total_results = 600
 
-if !exists('g:text_omnicomplete_bigram_indicator')
-    let g:text_omnicomplete_bigram_indicator = '*'
-endif
+let g:text_omnicomplete_bigram_indicator = '*'
 
 " Main function for completion - the omnifunc.
 " See ':help complete-functions' for the specification of this function.

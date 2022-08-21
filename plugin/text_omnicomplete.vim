@@ -1,9 +1,8 @@
 if exists('g:text_omnicomplete_enable_plugin')
-    if g:text_omnicomplete_enable_plugin == 0
-        finish
-    endif
-endif
+    if g:text_omnicomplete_enable_plugin == 0  | finish  | en
+en
 
-autocmd FileType text setlocal omnifunc=text_omnicomplete#Complete
+au FileType  text       setl  omnifunc=text_omnicomplete#Complete
+            "\ 没有text这个filetype吧
 
-command! TextOmnicompleteBuild call text_omnicomplete#Build()
+com!  TextOmnicompleteBuild call text_omnicomplete#Build()
