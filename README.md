@@ -1,15 +1,19 @@
 # vim-text-omnicomplete
-`vim-text-omnicomplete` is a Vim autocomplete plugin for English words in plain
-text files. It provides autocomplete suggestions of English words based on a
-word frequency list. To improve the accuracy of suggestions, it also makes
-suggestions based on the preceding word.
 
-This plugin automatically sets the omni completion function (`omnifunc`) for
-files with the text filetype. As such, when editing text files, you will
-be able to use <kbd>Ctrl</kbd><kbd>x</kbd><kbd>Ctrl</kbd><kbd>o</kbd> to show
-a list of autocomplete suggestions.
+`vim-text-omnicomplete` is a Vim autocomplete plugin for English words in plain text files.
+It provides autocomplete suggestions of English words based on
+a word frequency list.
+To improve the accuracy of suggestions,
+it also makes suggestions based on
+the preceding word.
 
-![vim-text-omnicomplete screenshot](screenshot.png)
+
+This plugin automatically sets the omni completion function
+(`omnifunc`)
+for files with the text filetype.
+As such,
+when editing text files,
+you will be able to use <C-x>  <C-o> to show a list of autocomplete suggestions.  
 
 
 ## Requirements
@@ -18,24 +22,6 @@ a list of autocomplete suggestions.
 
 
 ## Installation
-### Installation using Vim's native package management
-On Unix-like systems:
-```sh
-mkdir -p ~/.vim/pack/git-plugins/start/
-cd ~/.vim/pack/git-plugins/start/
-git clone https://github.com/cwfoo/vim-text-omnicomplete.git
-cd vim-text-omnicomplete
-make
-```
-
-On Windows using the "Git for Windows" Bash terminal:
-```sh
-mkdir -p ~/vimfiles/pack/git-plugins/start/
-cd ~/vimfiles/pack/git-plugins/start/
-git clone https://github.com/cwfoo/vim-text-omnicomplete.git
-cd vim-text-omnicomplete
-make
-```
 
 ### Installation using vim-plug
 You can install this plugin using [vim-plug](https://github.com/junegunn/vim-plug)
